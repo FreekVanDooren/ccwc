@@ -1,0 +1,4 @@
+#!/bin/sh
+JAVA_HOME=$(/usr/libexec/java_home -v 23) \
+PATH=$JAVA_HOME/bin:$PATH \
+java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -jar ./target/ccwc-1.0-SNAPSHOT-jar-with-dependencies.jar  "$@"
