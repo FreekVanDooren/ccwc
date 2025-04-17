@@ -27,14 +27,15 @@ public class Main {
                 }
             }
         }
-        String printable = counters.stream().map(
-                Counter::getTotal
-        ).map(String::valueOf).collect(Collectors.joining("\t", "\t", " "));
+        String printable = counters.stream()
+                .map(Counter::getTotal)
+                .map("%d"::formatted)
+                .collect(Collectors.joining("\t"));
 
 
-        return String.format("""
-                %s%s
-                """, printable, cliArguments.fileName());
+        return """
+                \t%s %s
+                """.formatted(printable, cliArguments.fileName());
     }
 
 }
