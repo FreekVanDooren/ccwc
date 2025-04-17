@@ -10,10 +10,7 @@ class WordCounterTest {
     void empty_string_input() throws Exception {
         String input = "";
 
-        WordCounter w = new WordCounter();
-        char[] charArray = input.toCharArray();
-        w.update(charArray.length, charArray);
-        long actual = w.getTotal();
+        long actual = count(input);
 
         assertEquals(0, actual);
     }
@@ -22,10 +19,7 @@ class WordCounterTest {
     void counts_a_word() throws Exception {
         String input = "one";
 
-        WordCounter w = new WordCounter();
-        char[] charArray = input.toCharArray();
-        w.update(charArray.length, charArray);
-        long actual = w.getTotal();
+        long actual = count(input);
 
         assertEquals(1, actual);
     }
@@ -34,10 +28,7 @@ class WordCounterTest {
     void counts_multiple_words() throws Exception {
         String input = "one\ntwo";
 
-        WordCounter w = new WordCounter();
-        char[] charArray = input.toCharArray();
-        w.update(charArray.length, charArray);
-        long actual = w.getTotal();
+        long actual = count(input);
 
         assertEquals(2, actual);
     }
@@ -46,11 +37,15 @@ class WordCounterTest {
     void counts_multiple_words_ignores_multiple_line_endings() throws Exception {
         String input = "one\n\ntwo";
 
+        long actual = count(input);
+
+        assertEquals(2, actual);
+    }
+
+    private long count(String input) {
         WordCounter w = new WordCounter();
         char[] charArray = input.toCharArray();
         w.update(charArray.length, charArray);
-        long actual = w.getTotal();
-
-        assertEquals(2, actual);
+        return w.getTotal();
     }
 }

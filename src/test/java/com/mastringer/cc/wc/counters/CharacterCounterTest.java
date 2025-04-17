@@ -10,10 +10,7 @@ class CharacterCounterTest {
     void empty_string_input() throws Exception {
         String input = "";
 
-        CharacterCounter c = new CharacterCounter();
-        char[] charArray = input.toCharArray();
-        c.update(charArray.length, charArray);
-        long actual = c.getTotal();
+        long actual = count(input);
 
         assertEquals(0, actual);
     }
@@ -22,10 +19,7 @@ class CharacterCounterTest {
     void counts_a_character() throws Exception {
         String input = "o";
 
-        CharacterCounter c = new CharacterCounter();
-        char[] charArray = input.toCharArray();
-        c.update(charArray.length, charArray);
-        long actual = c.getTotal();
+        long actual = count(input);
 
         assertEquals(1, actual);
     }
@@ -34,10 +28,7 @@ class CharacterCounterTest {
     void counts_multiple_words_unix() throws Exception {
         String input = "on\n\te";
 
-        CharacterCounter c = new CharacterCounter();
-        char[] charArray = input.toCharArray();
-        c.update(charArray.length, charArray);
-        long actual = c.getTotal();
+        long actual = count(input);
 
         assertEquals(5, actual);
     }
@@ -46,10 +37,7 @@ class CharacterCounterTest {
     void counts_multiple_words_windows() throws Exception {
         String input = "on\r\n\te";
 
-        CharacterCounter c = new CharacterCounter();
-        char[] charArray = input.toCharArray();
-        c.update(charArray.length, charArray);
-        long actual = c.getTotal();
+        long actual = count(input);
 
         assertEquals(6, actual);
     }
@@ -58,11 +46,15 @@ class CharacterCounterTest {
     void counts_special_characters() throws Exception {
         String input = "ŭœ";
 
+        long actual = count(input);
+
+        assertEquals(2, actual);
+    }
+
+    private long count(String input) {
         CharacterCounter c = new CharacterCounter();
         char[] charArray = input.toCharArray();
         c.update(charArray.length, charArray);
-        long actual = c.getTotal();
-
-        assertEquals(2, actual);
+        return c.getTotal();
     }
 }

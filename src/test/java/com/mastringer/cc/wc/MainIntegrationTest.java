@@ -1,7 +1,8 @@
 package com.mastringer.cc.wc;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainIntegrationTest {
     private static final String inputFile = MainIntegrationTest.class.getClassLoader().getResource("integration_test.txt").getFile();
@@ -11,8 +12,8 @@ public class MainIntegrationTest {
         var args = new String[]{"-c", inputFile};
 
         var actual = Main.process(args);
-        
-        Assertions.assertEquals(String.format("\t342190 %s\n", inputFile), actual);
+
+        assertOutputEquals("\t342190 %s\n", actual);
     }
 
     @Test
@@ -21,7 +22,7 @@ public class MainIntegrationTest {
 
         var actual = Main.process(args);
 
-        Assertions.assertEquals(String.format("\t7145 %s\n", inputFile), actual);
+        assertOutputEquals("\t7145 %s\n", actual);
     }
 
     @Test
@@ -30,7 +31,7 @@ public class MainIntegrationTest {
 
         var actual = Main.process(args);
 
-        Assertions.assertEquals(String.format("\t58164 %s\n", inputFile), actual);
+        assertOutputEquals("\t58164 %s\n", actual);
     }
 
     @Test
@@ -39,7 +40,7 @@ public class MainIntegrationTest {
 
         var actual = Main.process(args);
 
-        Assertions.assertEquals(String.format("\t339292 %s\n", inputFile), actual);
+        assertOutputEquals("\t339292 %s\n", actual);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class MainIntegrationTest {
 
         var actual = Main.process(args);
 
-        Assertions.assertEquals(String.format("\t7145\t58164\t342190 %s\n", inputFile), actual);
+        assertOutputEquals("\t7145\t58164\t342190 %s\n", actual);
     }
 
     @Test
@@ -57,6 +58,10 @@ public class MainIntegrationTest {
 
         var actual = Main.process(args);
 
-        Assertions.assertEquals(String.format("\t342190\t7145 %s\n", inputFile), actual);
+        assertOutputEquals("\t342190\t7145 %s\n", actual);
+    }
+
+    private static void assertOutputEquals(String expected, String actual) {
+        assertEquals(String.format(expected, inputFile), actual);
     }
 }

@@ -10,10 +10,7 @@ class LineCounterTest {
     void empty_string_input() throws Exception {
         String input = "";
 
-        LineCounter l = new LineCounter();
-        char[] charArray = input.toCharArray();
-        l.update(charArray.length, charArray);
-        long actual = l.getTotal();
+        long actual = count(input);
 
         assertEquals(0, actual);
     }
@@ -22,10 +19,7 @@ class LineCounterTest {
     void counts_a_line() throws Exception {
         String input = "\n";
 
-        LineCounter l = new LineCounter();
-        char[] charArray = input.toCharArray();
-        l.update(charArray.length, charArray);
-        long actual = l.getTotal();
+        long actual = count(input);
 
         assertEquals(1, actual);
     }
@@ -34,11 +28,15 @@ class LineCounterTest {
     void counts_multiple_lines() throws Exception {
         String input = "\n\n";
 
+        long actual = count(input);
+
+        assertEquals(2, actual);
+    }
+
+    private long count(String input) {
         LineCounter l = new LineCounter();
         char[] charArray = input.toCharArray();
         l.update(charArray.length, charArray);
-        long actual = l.getTotal();
-
-        assertEquals(2, actual);
+        return l.getTotal();
     }
 }
